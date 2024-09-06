@@ -9,7 +9,7 @@ import {
     NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import Link from "next/link";
-import SignInButton from "@/components/buttons/SignInButton";
+// import SignInButton from "@/components/buttons/SignInButton";
 
 
 
@@ -50,7 +50,7 @@ const AdminNavBar = () => {
             </NavigationMenu>
 
         </nav>
-            <SignInButton/>
+            {/*<SignInButton/>*/}
         </div>
     );
 };

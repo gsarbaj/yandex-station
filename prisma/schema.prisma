@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,23 +7,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password_hash String
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
 model Account {
-  id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expiresAt  DateTime
+
+  @@id([identifier, token])
+  @@map("verification_tokens")
 }
 
 enum UserRole {
@@ -37,16 +71,24 @@ enum UserRole {
   USER
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  phone_number  String?
-  email         String?   @unique
-  password      String?
-  emailVerified DateTime?
-  image         String?
-  role          UserRole  @default(USER)
-  accounts      Account[]
+enum PaymentType {
+  CASH
+  CARD
+  REVOLUT
+  SWEDBANK
+}
+
+enum OrderType {
+  WEB
+  MANUAL
+}
+
+enum OrderState {
+  NEW
+  PENDING
+  SHIPPING
+  FINISHED
+  DELETED
 }
 
 model Product {
@@ -58,13 +100,44 @@ model Product {
   revolut_link  String?
   swedbank_link String?
   stock_qty     Int?    @default(0)
+  slug          String  @unique
   order         Order[]
 }
 
 model Order {
-  id           Int       @id @default(autoincrement())
-  created_at   DateTime  @default(now())
-  product      Product[]
-  qty          Int       @default(1)
-  payment_cash Boolean?  @default(false)
+  id               Int        @id @default(autoincrement())
+  idHash           String     @unique @default(cuid())
+  created_at       DateTime   @default(now())
+  finished_at      DateTime?
+  product          Product[]
+  costumer         Costumer?  @relation(fields: [costumerId], references: [id])
+  qty              Int        @default(1)
+  order_price      Int        @default(0)
+  payment_received Int        @default(0)
+  order_type       OrderType  @default(MANUAL)
+  costumerId       Int?
+  order_state      OrderState @default(NEW)
+  Payment          Payment[]
+  note             String?
+}
+
+model Payment {
+  id           Int         @id @default(autoincrement())
+  payment_type PaymentType @default(CASH)
+  created_at   DateTime    @default(now())
+  order        Order?      @relation(fields: [orderId], references: [id])
+  orderId      Int
+  confirmed    Boolean     @default(false)
+}
+
+model Costumer {
+  id           Int      @id @default(autoincrement())
+  created_at   DateTime @default(now())
+  first_name   String?
+  last_name    String?
+  phone_number String?  @unique
+  email        String?  @unique
+  user_address String?
+  region       String?
+  order        Order[]
 }

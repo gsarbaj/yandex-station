@@ -1,13 +1,8 @@
 import React from 'react';
-import midi from '@/public/pic/FxKaJzRBjgzQ19lnu5cCU-transformed.webp'
-import mini from '@/public/pic/yandex-station-mini-black-01-600x600.webp'
-import stancija2 from '@/public/pic/stancija_2.webp'
-import max from '@/public/pic/max.webp'
-import lite from '@/public/pic/lite.png'
 import Image from "next/image";
 import {buttonVariants} from "@/components/ui/button";
 import Link from "next/link";
-import {getProductBySku} from "@/actions";
+import {Badge} from "@/components/ui/badge";
 
 interface ProductCardProps {
     title: string,
@@ -23,7 +18,7 @@ const ProductCard = ({title, description, price, link, picture, index}: ProductC
 
     let divClass = 'flex flex-col p-6 m-3 space-y-10 rounded-2xl shadow-2xl md:flex-row md:space-y-0 md:space-x-10 md:m-0 md:p-16'
 
-    if ((index+1 ) % 2 == 0) {
+    if ((index + 1) % 2 == 0) {
         divClass = 'flex flex-col p-6 m-3 space-y-10 rounded-2xl shadow-2xl md:flex-row-reverse md:space-y-0 md:space-x-10 md:m-0 md:p-16'
     }
 
@@ -39,9 +34,10 @@ const ProductCard = ({title, description, price, link, picture, index}: ProductC
             <div className={'flex flex-col space-y-6 justify-between'}>
                 <div className={'flex flex-col mb-4 space-y-3 text-center md:text-left'}>
                     <div>
-                        <div className={'inline-block px-3 py-1 text-sm text-white bg-primary rounded-full'}>
-                            доставка по Висагинасу бесплатно
-                        </div>
+
+
+                        <Badge>доставка по Висагинасу бесплатно</Badge>
+
                     </div>
 
                     {/*     Title    */}

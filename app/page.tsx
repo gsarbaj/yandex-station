@@ -10,15 +10,14 @@ import max from '@/public/pic/max.webp'
 import lite from '@/public/pic/lite.png'
 
 
-
 const data = [
-  {
-    title: "Яндекс Станция Миди",
-    description: "Умная колонка с лаконичным дизайном. Новые возможности Алисы в компактном корпусе",
-    price: 28000,
-    link: '/midi',
-    picture: midi
-  },
+    {
+        title: "Яндекс Станция Миди",
+        description: "Умная колонка с лаконичным дизайном. Новые возможности Алисы в компактном корпусе",
+        price: 28000,
+        link: '/midi',
+        picture: midi
+    },
     {
         title: "Яндекс Станция второго поколения",
         description: "Умная колонка с лаконичным дизайном и чистым звуком станет центром вашего умного дома с Алисой",
@@ -52,26 +51,23 @@ const data = [
 
 export default function Home() {
 
-    const productsRender = data.map((product) => { // @ts-ignore
+    const productsRender = data.map((product) => {
         return (
-        <div key={data.indexOf(product)}>
-            <ProductCard index={data.indexOf(product)} title={product.title} description={product.description} price={product.price} link={product.link} picture={product.picture}/>
-        </div>
+            <div key={data.indexOf(product)}>
+                <ProductCard index={data.indexOf(product)} title={product.title} description={product.description}
+                             price={product.price} link={product.link} picture={product.picture}/>
+            </div>
 
-    )})
+        )
+    })
 
 
     return (
-      <main className={''}>
+        <main className={''}>
 
-        <MainNavBar/>
-        <Hero/>
-          {productsRender}
-
-
-
-
-
-    </main>
-  );
+            <MainNavBar/>
+            <Hero/>
+            {productsRender}
+        </main>
+    );
 }

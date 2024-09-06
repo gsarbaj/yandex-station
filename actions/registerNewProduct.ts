@@ -13,6 +13,7 @@ interface RegisterNewProductProps {
     revolut_link: string
     swedbank_link: string
     stock_qty: string
+    slug: string
 }
 
 
@@ -124,6 +125,7 @@ export async function registerNewProduct(values: TypeOf<ZodObject<{
 
     console.log(values)
 
+
     const registerProduct = await db.product.create({
         data: {
             sku: values.sku,
@@ -132,11 +134,12 @@ export async function registerNewProduct(values: TypeOf<ZodObject<{
             price: removeNonNumericAndSpacesAndConvertToNumber(values.price),
             revolut_link: values.revolut_link,
             swedbank_link: values.swedbank_link,
-            stock_qty: removeNonNumericAndSpacesAndConvertToNumber(values.stock_qty)
+            stock_qty: removeNonNumericAndSpacesAndConvertToNumber(values.stock_qty),
+            // @ts-ignore
+            slug: values.slug
         }
     })
 
-    console.log(registerProduct);
 
     revalidatePath('/admin/products/')
     redirect('/admin/products/')

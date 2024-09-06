@@ -1,10 +1,14 @@
 export const publicRoutes = [
     "/",
     "/midi",
-    "/second",
+    "/station-gen2",
     "/max",
     "/mini",
-    "/lite"
+    "/mini-nowatch",
+    "/lite",
+    "/order",
+    `/^\\/order\\/.*$/`,
+    "/order/.*"
 ]
 
 export const authRoutes = [

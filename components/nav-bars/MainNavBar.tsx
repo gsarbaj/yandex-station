@@ -34,16 +34,16 @@ const components: { title: string; href: string; description: string, pic: any }
     },
     {
         title: "Станция 2",
-        href: "/second",
+        href: "/station-gen2",
         description: "Умная колонка с лаконичным дизайном и чистым звуком.",
         pic: stancija2
     },
-    {
-        title: "Макс",
-        href: "/max",
-        description: "Четыре новых оттенка самой мощной умной колонки",
-        pic: max
-    },
+    // {
+    //     title: "Макс",
+    //     href: "/max",
+    //     description: "Четыре новых оттенка самой мощной умной колонки",
+    //     pic: max
+    // },
 
     // {
     //     title: "Мини",
@@ -73,7 +73,7 @@ export default function MainNavBar() {
         <NavigationMenu>
             <NavigationMenuList >
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>Станции</NavigationMenuTrigger>
+                    <NavigationMenuTrigger><Link href={'/'}>Станции</Link></NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                             {components.map((component) => (

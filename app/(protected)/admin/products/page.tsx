@@ -2,6 +2,7 @@ import {Product, columns} from "./columns"
 import {ProductsTable} from "@/components/tables/ProductsTable";
 import {db} from "@/db";
 import AddProductButton from "@/components/buttons/AddProductButton";
+import {Modal} from "@/components/modal";
 
 
 export const dynamic = 'force-dynamic'
@@ -22,14 +23,9 @@ export default async function ProductPage() {
 
     return (
         <>
-            <AddProductButton/>
-
             <div className="container mx-auto py-10">
                 <ProductsTable columns={columns} data={data}/>
             </div>
-
-
         </>
-
     )
 }
