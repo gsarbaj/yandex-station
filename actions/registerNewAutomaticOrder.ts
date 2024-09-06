@@ -104,14 +104,15 @@ async function orderCash(productSlug: string, first_name: string, last_name: str
         orderDetails = order
 
 
-        return {message: 'success'}
+
         // Telegram message
 
-        // await axios.post(`${process.env["TELEGRAM_BOT_API"]}/sendMessage`, {
-        //     chat_id: bot.CHAT_ID,
-        //     text: `НОВЫЙ ЗАКАЗ: ${note}`
-        // })
-
+        await axios.post(`${process.env["TELEGRAM_BOT_API"]}/sendMessage`, {
+            chat_id: bot.CHAT_ID,
+            text: `НОВЫЙ ЗАКАЗ: ${note}`
+        })
+        
+        return {message: 'success'}
     } catch (error) {
         console.error('Error creating order ', error)
         return {message: 'Error creating order'}
