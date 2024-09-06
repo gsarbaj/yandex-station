@@ -7,7 +7,7 @@ export const protectRoute = async () => {
     const {user} = await validateRequest()
 
     if (!user) {
-        console.error('REDIRECT')
+        // console.error('REDIRECT')
         return redirect('/login')
     }
 }

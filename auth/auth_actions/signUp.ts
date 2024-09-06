@@ -23,9 +23,9 @@ export const signUp = async (data: z.infer<typeof RegisterSchema>) => {
         //   "Invalid login credentials. Please check your email and password",
         // );
 
-        console.log('')
-        console.error('LOGIN ERROR', 'Invalid login credentials. Please check your email and password')
-        console.log('')
+        // console.log('')
+        // console.error('LOGIN ERROR', 'Invalid login credentials. Please check your email and password')
+        // console.log('')
         return {error: 'Invalid login credentials. Please check your email and password', success: false}
     }
 
@@ -42,9 +42,9 @@ export const signUp = async (data: z.infer<typeof RegisterSchema>) => {
             //   "Invalid login credentials. Please check your email and password",
             // );
 
-            console.log('')
-            console.error('LOGIN ERROR', 'Invalid login credentials. Please check your email and password')
-            console.log('')
+            // console.log('')
+            // console.error('LOGIN ERROR', 'Invalid login credentials. Please check your email and password')
+            // console.log('')
             return {error: 'Invalid login credentials. Please check your email and password', success: false}
 
         }
