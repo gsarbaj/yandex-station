@@ -6,6 +6,7 @@ import axios from "axios";
 import {redirect} from "next/navigation";
 import {revalidatePath} from "next/cache";
 import {toMoney} from "@/util/toMoney";
+import {newAutomaticOrderTelegramSend} from "@/actions/newAutomaticOrderTelegramSend";
 
 
 const bot = {
@@ -107,11 +108,13 @@ async function orderCash(productSlug: string, first_name: string, last_name: str
 
         // Telegram message
 
-        await axios.post(`${process.env["TELEGRAM_BOT_API"]}/sendMessage`, {
-            chat_id: bot.CHAT_ID,
-            text: `НОВЫЙ ЗАКАЗ: ${note}`
-        })
-        
+        // await axios.post(`${process.env["TELEGRAM_BOT_API"]}/sendMessage`, {
+        //     chat_id: bot.CHAT_ID,
+        //     text: `НОВЫЙ ЗАКАЗ: ${note}`
+        // })
+
+        await newAutomaticOrderTelegramSend(note)
+
         return {message: 'success'}
     } catch (error) {
         console.error('Error creating order ', error)
