@@ -9,9 +9,6 @@ import {toMoney} from "@/util/toMoney";
 import {newAutomaticOrderTelegramSend} from "@/actions/newAutomaticOrderTelegramSend";
 
 
-const bot = {
-    CHAT_ID: '-4147884596'
-}
 
 function removeNonNumericAndSpacesAndConvertToNumber(str: string) {
     // Use a regular expression to replace all non-numeric characters and spaces with an empty string
@@ -113,7 +110,7 @@ async function orderCash(productSlug: string, first_name: string, last_name: str
         //     text: `НОВЫЙ ЗАКАЗ: ${note}`
         // })
 
-        await newAutomaticOrderTelegramSend(note)
+        // await newAutomaticOrderTelegramSend(note)
 
         return {message: 'success'}
     } catch (error) {

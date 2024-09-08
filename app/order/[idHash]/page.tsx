@@ -6,6 +6,7 @@ import {Separator} from "@/components/ui/separator"
 import Link from "next/link"
 import {Button} from "@/components/ui/button"
 import {toMoney} from "@/util/toMoney";
+import TelegramSender from "@/components/actions/TelegramSender";
 
 
 export default async function OrderPage({params}: any) {
@@ -16,6 +17,7 @@ export default async function OrderPage({params}: any) {
     let orderDate: string = order?.created_at.toISOString().split('T')[0] as string
     let productPrice: string = toMoney(order?.order_price as number).priceRegular + '\u20AC'
     let productTitle: string = `${order?.product[0].title} (${order?.product[0].sku})`
+    let orderNote = `[${order?.id}]  ${order?.note}`
 
     switch (order?.Payment[0].payment_type) {
         case 'CASH':
@@ -36,9 +38,10 @@ export default async function OrderPage({params}: any) {
     }
 
 
+
     // @ts-ignore
     return (<>
-            <MainNavBar/>
+            {/*<MainNavBar/>*/}
             <div className="flex flex-col items-center justify-center min-h-screen bg-muted/40 p-4 sm:p-6">
                 <Card className="w-full max-w-xl">
                     <CardHeader className="bg-black text-primary-foreground p-6 rounded-t-lg">
@@ -119,6 +122,8 @@ export default async function OrderPage({params}: any) {
                     </CardFooter>
                 </Card>
             </div>
+
+        <TelegramSender note={orderNote}/>
 
 
         </>);

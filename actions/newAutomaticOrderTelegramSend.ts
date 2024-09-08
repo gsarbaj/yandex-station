@@ -5,7 +5,6 @@ import axios from "axios";
 const bot = {
     CHAT_ID: '-4147884596'
 }
-
 export const newAutomaticOrderTelegramSend = async (note: string) => {
 
     console.log('TELEGRAM SEND');
