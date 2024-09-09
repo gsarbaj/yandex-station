@@ -17,7 +17,7 @@ interface TelegramSenderProps {
     note?: string | null | undefined
 }
 
-const TelegramSender: React.FC = ({note}:any) => {
+const TelegramSender: React.FC<TelegramSenderProps> = ({note}:any) => {
 
     const [message, setNote] = useState<string>(note);
     const [sendMessage, setSendMessage] = useState<boolean>(true);
