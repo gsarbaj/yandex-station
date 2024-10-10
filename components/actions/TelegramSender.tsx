@@ -2,6 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import {envConfig} from "@/env-config";
 
 interface TelegramResponse {
     ok: boolean;
@@ -45,6 +46,7 @@ const TelegramSender: React.FC<TelegramSenderProps> = ({note}:any) => {
 
             // Using fetch
             const url = `https://api.telegram.org/bot7320824806:AAEdttQEKbRpUZoMSlVbkyG_kGvGHBVDXBM/sendMessage`;
+            console.log(process.env["TELEGRAM_API"])
             const body = JSON.stringify({
                 chat_id: bot.CHAT_ID,
                 text: `НОВЫЙ ЗАКАЗ : ${message}`

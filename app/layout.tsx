@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from 'sonner';
 import "./globals.css";
+import PlausibleProvider from "next-plausible";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,6 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+
+    <head>
+        <PlausibleProvider domain={"kolonka.eu"}/>
+    </head>
+
       <body className={inter.className}>
 
           {children}
